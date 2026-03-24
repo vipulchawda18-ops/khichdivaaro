@@ -60,21 +60,6 @@
     .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:700; color:var(--brown); line-height:1.15; margin-bottom:0.8rem; }
     .section-line { width:50px; height:3px; background:var(--terra); margin-bottom:3rem; }
 
-    /* MENU */
-    #menu { background:var(--white); }
-    .menu-header { text-align:center; }
-    .menu-header .section-line { margin:0 auto 3rem; }
-    .menu-tabs { display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:3rem; }
-    .tab-btn { padding:8px 22px; border:1.5px solid var(--brown-mid); background:transparent; border-radius:50px; font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:1px; cursor:pointer; color:var(--brown-mid); transition:all 0.2s; text-transform:uppercase; }
-    .tab-btn:hover,.tab-btn.active { background:var(--terra); border-color:var(--terra); color:var(--white); }
-    .menu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
-    .menu-card { background:var(--cream); border:1.5px solid var(--cream-dark); border-radius:10px; padding:1.8rem; position:relative; transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s; animation:fadeUp 0.5s ease both; }
-    .menu-card:hover { transform:translateY(-5px); box-shadow:0 12px 32px rgba(44,24,16,0.1); border-color:var(--terra); }
-    .menu-card-icon { font-size:2.2rem; margin-bottom:0.9rem; display:block; }
-    .menu-card-name { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:700; margin-bottom:0.5rem; color:var(--brown); }
-    .menu-card-desc { font-family:'Lora',serif; font-size:0.88rem; color:var(--brown-mid); line-height:1.65; }
-    .menu-card-tag { position:absolute; top:1rem; right:1rem; background:var(--amber-light); color:var(--terra-dark); border:1px solid var(--amber); font-size:0.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:3px 10px; border-radius:50px; }
-
     /* ABOUT */
     #about { background:var(--dark); display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
     .about-visual { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
@@ -113,6 +98,69 @@
     footer { background:var(--dark); color:rgba(255,255,255,0.3); text-align:center; padding:2rem 6%; font-size:0.8rem; border-top:1px solid rgba(212,98,26,0.3); }
     footer span { color:var(--amber); }
 
+    /* COMING SOON POPUP */
+    #comingSoonOverlay {
+      position:fixed; inset:0; z-index:9999;
+      background:rgba(28,15,8,0.75);
+      backdrop-filter:blur(6px);
+      display:flex; align-items:center; justify-content:center;
+      padding:1.5rem;
+      opacity:0; pointer-events:none;
+      transition:opacity 0.4s ease;
+    }
+    #comingSoonOverlay.visible { opacity:1; pointer-events:all; }
+    .popup-box {
+      background:var(--cream);
+      border-radius:16px;
+      padding:3rem 2.5rem;
+      max-width:480px; width:100%;
+      text-align:center;
+      position:relative;
+      border:2px solid var(--cream-dark);
+      box-shadow:0 24px 60px rgba(28,15,8,0.3);
+      animation:fadeUp 0.5s ease both;
+    }
+    .popup-icon { font-size:3rem; margin-bottom:1rem; display:block; }
+    .popup-badge {
+      display:inline-block;
+      background:var(--amber-light);
+      color:var(--terra-dark);
+      border:1px solid var(--amber);
+      font-size:0.65rem; font-weight:700;
+      letter-spacing:3px; text-transform:uppercase;
+      padding:5px 14px; border-radius:50px;
+      margin-bottom:1.2rem;
+    }
+    .popup-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.4rem; font-weight:700;
+      color:var(--brown); line-height:1.1;
+      margin-bottom:0.8rem;
+    }
+    .popup-title em { font-style:italic; color:var(--terra); }
+    .popup-text {
+      font-family:'Lora',serif;
+      font-size:0.95rem; color:var(--brown-mid);
+      line-height:1.75; margin-bottom:2rem;
+    }
+    .popup-close {
+      background:var(--terra); color:var(--white);
+      padding:12px 28px; border:none; border-radius:4px;
+      font-family:'DM Sans',sans-serif;
+      font-size:0.85rem; font-weight:700;
+      letter-spacing:1.5px; text-transform:uppercase;
+      cursor:pointer; transition:all 0.2s;
+      box-shadow:0 4px 16px rgba(212,98,26,0.3);
+    }
+    .popup-close:hover { background:var(--terra-dark); transform:translateY(-2px); }
+    .popup-dismiss {
+      display:block; margin-top:1rem;
+      font-size:0.78rem; color:var(--brown-light);
+      cursor:pointer; text-decoration:underline;
+      background:none; border:none; font-family:'DM Sans',sans-serif;
+    }
+    .popup-dismiss:hover { color:var(--brown-mid); }
+
     /* ANIMATIONS */
     @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
     @keyframes fadeDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
@@ -131,11 +179,22 @@
   </style>
 </head>
 <body>
+  <!-- COMING SOON POPUP -->
+  <div id="comingSoonOverlay">
+    <div class="popup-box">
+      <span class="popup-icon">🍲</span>
+      <div class="popup-badge">Launching Soon</div>
+      <h2 class="popup-title">Something<br><em>delicious</em> is coming!</h2>
+      <p class="popup-text">Khichdivaaro is almost ready to serve you wholesome, homestyle khichdi right here in Bhilai-Durg. Stay tuned — we're cooking up something special!</p>
+      <button class="popup-close" id="closePopup">Explore the Website</button>
+      <button class="popup-dismiss" onclick="document.getElementById('comingSoonOverlay').classList.remove('visible')">Maybe later</button>
+    </div>
+  </div>
+
   <nav>
     <a href="#home" class="nav-logo">Khichdi<span>vaaro</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
-      <li><a href="#menu">Menu</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -148,8 +207,8 @@
     <h1 class="hero-title">Dil se Desi,<br><em>Tasty & Healthy.</em></h1>
     <p class="hero-sub">Wholesome, hearty, and made with love — every bowl of our khichdi brings the warmth of a home-cooked meal right to you.</p>
     <div class="hero-cta">
-      <a href="#menu" class="btn-primary">Explore Our Menu</a>
-      <a href="#about" class="btn-secondary">Our Story</a>
+      <a href="#about" class="btn-primary">Our Story</a>
+      <a href="#contact" class="btn-secondary">Contact Us</a>
     </div>
     <div class="hero-scroll">Scroll</div>
   </section>
@@ -162,19 +221,6 @@
     <div class="feature-item">Bhilai-Durg Local</div>
   </div>
 
-  <section id="menu">
-    <div class="menu-header">
-      <div class="section-label">What We Serve</div>
-      <h2 class="section-title">Our Khichdi Menu</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="menu-tabs">
-      <button class="tab-btn active" onclick="filterMenu('all',this)">All</button>
-      <button class="tab-btn" onclick="filterMenu('khichdi',this)">Khichdis</button>
-      <button class="tab-btn" onclick="filterMenu('accomp',this)">Accompaniments</button>
-    </div>
-    <div class="menu-grid" id="menuGrid"></div>
-  </section>
 
   <section id="about">
     <div class="about-visual">
@@ -225,39 +271,23 @@
   <footer><p>© 2026 <span>Khichdivaaro</span> · Bhilai-Durg, Chhattisgarh · Made with 🍲 and ❤️</p></footer>
 
   <script>
-    const menuItems = [
-      {id:1,cat:'khichdi',icon:'🍲',name:'Classic Moong Dal Khichdi',desc:'The original comfort — soft rice & yellow moong dal cooked with a tadka of ghee, cumin and hing.',tag:'Bestseller'},
-      {id:2,cat:'khichdi',icon:'🌶️',name:'Masala Khichdi',desc:'A bolder take with whole spices, onion, tomato and a rich masala base. Hearty and flavourful.',tag:'Spicy'},
-      {id:3,cat:'khichdi',icon:'🥕',name:'Vegetable Khichdi',desc:'Loaded with seasonal vegetables — carrots, beans, peas and more — for a nutritious complete meal.',tag:'Healthy'},
-      {id:4,cat:'khichdi',icon:'⚪',name:'Sabudana Khichdi',desc:'Pearl sago cooked with peanuts, green chilli and lemon. Light, delicious and perfect any time.',tag:'Vrat Special'},
-      {id:5,cat:'khichdi',icon:'🌾',name:'Bajra Khichdi',desc:'Traditional pearl millet khichdi — earthy, nutritious and a winter favourite in Chhattisgarh.',tag:'Traditional'},
-      {id:6,cat:'khichdi',icon:'🥬',name:'Palak Khichdi',desc:'Fresh spinach blended into the khichdi for a vibrant green bowl that is as healthy as it is tasty.',tag:'Healthy'},
-      {id:7,cat:'accomp',icon:'🥛',name:'Kadhi',desc:'Creamy, tangy yoghurt-based curry — the perfect companion for any khichdi bowl.',tag:''},
-      {id:8,cat:'accomp',icon:'🥗',name:'Raita',desc:'Chilled whisked yoghurt with fresh herbs and spices to cool down any spicy bowl.',tag:''},
-      {id:9,cat:'accomp',icon:'🫙',name:'Achaar',desc:'House pickle — a little goes a long way to add a punch of flavour to your meal.',tag:''},
-      {id:10,cat:'accomp',icon:'🥞',name:'Papad',desc:'Crispy roasted or fried papad — the classic crunch alongside your khichdi.',tag:''},
-      {id:11,cat:'accomp',icon:'✨',name:'Pure Ghee',desc:'A generous drizzle of pure desi ghee on top — because some things should never be skipped.',tag:'Must Try'},
-    ];
+    // Coming Soon popup - show on page load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('comingSoonOverlay').classList.add('visible');
+      }, 600);
+    });
 
-    function renderMenu(filter){
-      const grid=document.getElementById('menuGrid');
-      const filtered=filter==='all'?menuItems:menuItems.filter(i=>i.cat===filter);
-      grid.innerHTML=filtered.map((item,idx)=>`
-        <div class="menu-card" style="animation-delay:${idx*0.06}s">
-          ${item.tag?`<span class="menu-card-tag">${item.tag}</span>`:''}
-          <span class="menu-card-icon">${item.icon}</span>
-          <div class="menu-card-name">${item.name}</div>
-          <div class="menu-card-desc">${item.desc}</div>
-        </div>`).join('');
-    }
+    document.getElementById('closePopup').addEventListener('click', () => {
+      document.getElementById('comingSoonOverlay').classList.remove('visible');
+    });
 
-    function filterMenu(cat,btn){
-      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      renderMenu(cat);
-    }
-
-    renderMenu('all');
+    // Close on backdrop click
+    document.getElementById('comingSoonOverlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('comingSoonOverlay')) {
+        document.getElementById('comingSoonOverlay').classList.remove('visible');
+      }
+    });
 
     document.getElementById('hamburger').addEventListener('click',()=>{
       document.getElementById('navLinks').classList.toggle('open');
