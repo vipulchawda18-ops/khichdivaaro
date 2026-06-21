@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Khichdivaaro – Dil se Desi, Tasty & Healthy</title>
+  <title>Desi Khichdivaaro – Dil se Desi, Tasty & Healthy</title>
   <link rel="icon" type="image/png" href="images/logo.png"/>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-913Q7PFKMS"></script>
@@ -34,7 +34,7 @@
 
     /* NAV */
     nav { position:fixed; top:0; left:0; right:0; z-index:999; background:var(--dark); display:flex; align-items:center; justify-content:space-between; padding:0 6%; height:66px; border-bottom:2px solid var(--terra); }
-    .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:700; color:var(--amber); text-decoration:none; display:flex; align-items:center; gap:10px; }
+    .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:700; color:var(--amber); text-decoration:none; display:flex; align-items:center; gap:10px; white-space:nowrap; }
     .nav-logo span { color:var(--cream); }
     .nav-logo-img { width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; }
     .nav-links { display:flex; gap:2rem; list-style:none; }
@@ -123,6 +123,8 @@
 
     /* RESPONSIVE */
     @media(max-width:768px){
+      .nav-logo{font-size:1.15rem;gap:7px}
+      .nav-logo-img{width:34px;height:34px}
       .nav-links{display:none}
       .hamburger{display:flex}
       .nav-links.open{display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:var(--dark);padding:1.5rem 6%;gap:1.2rem;z-index:998;border-bottom:2px solid var(--terra)}
@@ -130,11 +132,15 @@
       .about-visual{display:none}
       .features-strip{gap:1.5rem}
     }
+    @media(max-width:420px){
+      .nav-logo{font-size:0.95rem;gap:6px}
+      .nav-logo-img{width:30px;height:30px}
+    }
   </style>
 </head>
 <body>
   <nav>
-    <a href="#home" class="nav-logo"><img src="images/logo.png" alt="Khichdivaaro logo" class="nav-logo-img"/>Khichdi<span>vaaro</span></a>
+    <a href="#home" class="nav-logo"><img src="images/logo.png" alt="Desi Khichdivaaro logo" class="nav-logo-img"/>Desi Khichdi<span>vaaro</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -177,7 +183,7 @@
       <div class="section-label">Our Story</div>
       <h2 class="section-title">Born from a<br><em style="font-style:italic;color:var(--terra)">grandmother's recipe</em></h2>
       <div class="section-line"></div>
-      <p class="about-text">At Khichdivaaro, we believe khichdi is more than just food — it's a feeling. It's the taste of home, of care, of simplicity at its finest. We started with a passion to bring authentic, nourishing khichdi to the heart of Bhilai-Durg.</p>
+      <p class="about-text">At Desi Khichdivaaro, we believe khichdi is more than just food — it's a feeling. It's the taste of home, of care, of simplicity at its finest. We started with a passion to bring authentic, nourishing khichdi to the heart of Bhilai-Durg.</p>
       <p class="about-text">Every variety we serve is crafted fresh daily using quality ingredients and time-honoured recipes. From classic moong dal to spiced masala and seasonal specials — there's a bowl for every mood.</p>
       <div class="about-values">
         <div class="about-value"><div class="about-value-dot"></div>Freshly prepared every day</div>
@@ -257,7 +263,7 @@
     </div>
   </section>
 
-  <footer><p>© 2026 <span>Khichdivaaro</span> · Bhilai-Durg, Chhattisgarh · Made with 🍲 and ❤️</p></footer>
+  <footer><p>© 2026 <span>Desi Khichdivaaro</span> · Bhilai-Durg, Chhattisgarh · Made with 🍲 and ❤️</p></footer>
 
   <script>
     document.getElementById('hamburger').addEventListener('click',()=>{
